@@ -1,39 +1,24 @@
 #!/usr/bin/env python3
 # -*- coding: utf8 -*-
-
-from selenium import webdriver
-import urllib.parse
 from bs4 import BeautifulSoup
 import requests
 import sys
-import lxml
+import urllib.parse
 import urllib.request
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
-from selenium.webdriver.common.keys import Keys
-import json
 import os
 import time
-import simplejson
-import time
 import logging
-import urllib.request
-import urllib.error
 from urllib.parse import urlparse
 import random
-from multiprocessing import Pool
 from user_agent import generate_user_agent
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys 
 import re
 import logging
-import multiprocessing
-import os
 print(os.environ['PORT'])
 print(type(os.environ['PORT']))
 print(int(os.environ['PORT']))
 ##############################################################
-#dbx = dropbox.Dropbox('f-KAniQltpAAAAAAAAAAJIbsiXs5GHwPExH3wvTg9HyW1TSWv90WITwbAiYWSOmS')
 url_host = 'http://www.pixiv.net/'
 url_login = 'https://accounts.pixiv.net/login'
 url_post = 'https://accounts.pixiv.net/api/login'
@@ -42,8 +27,6 @@ headers_default = {
 
     #'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.24 (KHTML, like Gecko) Chrome/19.0.1055.1 Safari/535.24'
 }
-#########
-'''
 s = requests.Session()
     # 访问登陆页，获取Cookie和post_key
 print('Visiting %s...' % url_login)
@@ -65,7 +48,7 @@ data_post = {
 print('Logining中...')
 
 r = s.post(url_post, data=data_post, headers=headers_default)
-'''
+
 ##############################################################
 def pixivsearch(string):
     try:   
@@ -298,8 +281,8 @@ from linebot.models import *
 
 app = Flask(__name__)
 
-line_bot_api = LineBotApi('5FQaDuHO+i1ANMpw6/t4UQDWFsodgnqdkgjNU+yMchj8PL+3nrUy8pb16CiuqOJSBf9Sm1Pz2636PLB4OuxFqxyTmiusaAiG2A1DtEkQMBjm7K6d9zcU4HQFeADuo9sX+0BJ71cDdzqXy2FMuQggaAdB04t89/1O/w1cDnyilFU=')
-handler = WebhookHandler('c0b3764f2ced579df9c339f3dc07c4e1')
+line_bot_api = LineBotApi('lNj/IFyiIW/4sNNFSv4iKMWF2PnfnpjkYAPdgIkxN+WUYN24JdxbUMRdc9c8nvddiyqmE3hw5OqE4UhHPe6ePqzpsluM/LiPVw53/JIUvDouoSDZRuo/SFiRY5llbhsylny/vMRN7OOE2lv3OMJW1wdB04t89/1O/w1cDnyilFU=')
+handler = WebhookHandler('fbffdcfaa94e16ebf95c9026fc8f562e')
 
 
 @app.route("/callback", methods=['POST'])
@@ -318,7 +301,6 @@ def callback():
         abort(400)
 
     return 'OK'
-
 
 def googles(query):
     query2=urllib.parse.quote_plus(query)
@@ -422,21 +404,9 @@ def googlei(query,n):
     return x
 
 
-    
-
-
-def get_sourceid(event):
-    if event.source.type == 'user':
-        return event.source.user_id
-    elif event.source.type == 'group':
-        return event.source.group_id
-    elif event.source.type == 'room':
-        return event.source.room_id
-    else:
-        raise Exception('event.source.type:%s' % event.source.type)
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    event.source.user_id=get_sourceid(event)
+   
     if event.message.text=='吃屎':  
         sss=['https://pixiv.cat/45068168.jpg','https://pixiv.cat/45068168.jpg']
         image1=[0]*2
@@ -446,11 +416,8 @@ def handle_message(event):
               
         image2+=image1
         line_bot_api.reply_message(event.reply_token,image2)
-        
         #line_bot_api.reply_message(event.reply_token,TextSendMessage(text='吃屎'))
-        
-        return 0
-    
+        return 0 
 ######################################################################
     if event.message.text.lower().startswith('p-s')==True:
         [url,item]=pixivsearch(event.message.text)  
@@ -618,8 +585,6 @@ def handle_message(event):
         #line_bot_api.push_message(event.source.user_id,TextSendMessage(text=googles(event.message.text[3:])))
         return 0
   
-
 import os
 if __name__ == "__main__":
-    
-    app.run(host='0.0.0.0',port=os.environ['PORT'])
+    app.run(host='0.0.0.0',port=int(os.environ['PORT']))

@@ -8,7 +8,7 @@ click==6.7
 decode==0.4.1
 idna==2.6
 itsdangerous==0.24
-Jinja2==2.10
+Jinja2==2.11.3
 lxml==4.1.1
 MarkupSafe==1.0
 pathtools==0.1.2

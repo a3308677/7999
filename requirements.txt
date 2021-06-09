@@ -12,7 +12,7 @@ Jinja2==2.10
 lxml==4.1.1
 MarkupSafe==1.0
 pathtools==0.1.2
-pip==9.0.1
+pip==19.2
 PyYAML==3.12
 reload==0.9
 requests==2.18.4
